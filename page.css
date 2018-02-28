@@ -1,0 +1,38 @@
+#container {
+  align-items: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#hcontainer {
+  align-items: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#hcontainer div {
+    margin-right: 1em;
+}
+
+#container div {
+    font-size: 110%;
+    margin-top: 5px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 2px;
+}
+
+th {
+    padding-right: 5px;
+}

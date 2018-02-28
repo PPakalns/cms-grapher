@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+
+  "name": "CMS ranking",
+  "description": "This extension parse scores and stores or displays them",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "cms grapher"
+  },
+
+  "content_scripts": [
+      {
+          "matches": ["https://contest.lio.lv/private/admin/contest/*/ranking"],
+          "js": ["common.js", "jquery.min.js", "logger.js"]
+      }
+  ],
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "unlimitedStorage"
+  ]
+}
