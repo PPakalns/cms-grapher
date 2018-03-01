@@ -64,12 +64,6 @@ function drawBody(order, columns, cresults) {
 
         let scores = cresults[username] || {}
 
-        // if (scores["Global"] == 0) {
-        //     if (user_row.hasOwnProperty(username)) {
-        //         delete user_row[username]
-        //     }
-        //     continue
-        // }
         tbody.appendChild(row)
 
         for (let i in columns)
@@ -89,23 +83,6 @@ function drawBody(order, columns, cresults) {
             toggleVisibility(username)
         })
     }
-}
-
-function convertResults(results, task_list) {
-    task_list = task_list || []
-    let cResults = {}
-    Object.keys(results).forEach((task) => {
-        task_list.push(task)
-        let task_results = results[task]
-        Object.keys(task_results).forEach((username) => {
-            if (cResults.hasOwnProperty(username) == false) {
-                cResults[username] = {}
-            }
-            let res = task_results[username].res
-            cResults[username][task] = res.length > 0 ? res[res.length - 1].score : 0;
-        })
-    })
-    return cResults;
 }
 
 let displayed = {}

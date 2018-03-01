@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "CMS ranking",
+  "name": "CMS grapher",
   "description": "This extension parse scores and stores or displays them",
   "version": "1.0",
 

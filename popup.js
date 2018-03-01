@@ -70,11 +70,17 @@ async function openPage() {
     chrome.tabs.create({url: url})
 }
 
+async function openTotalPage() {
+    let url = chrome.extension.getURL('ranking.html')
+    chrome.tabs.create({url: url})
+}
+
 $(document).ready(() => {
     updateState();
     $("#init_contest").click(initContest)
     $("#toggle_logging").click(toggleLogging)
     $("#graph_page").click(openPage)
+    $("#contest_total").click(openTotalPage)
 
     chrome.storage.onChanged.addListener(storageChanged)
 })

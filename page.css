@@ -1,5 +1,4 @@
 body {
-    width: 100%;
 }
 
 div {
@@ -19,6 +18,25 @@ h1 small {
     color: #444444;
 }
 
+#gifdiv {
+    position: fixed;
+    /* center the element */
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin-right: auto;
+    margin-left: auto;
+    /* give it dimensions */
+    min-height: 10em;
+    width: 90%;
+    text-align: center;
+    display: none;
+}
+
+#gifdiv img {
+    width: 100%;
+}
+
 #graphs div{
     width: 100%;
 }
@@ -29,6 +47,17 @@ h1 small {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+#contests {
+  align-items: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#contests div {
+    margin: 5px;
 }
 
 div#contest_table {

@@ -75,6 +75,7 @@ async function updateRes() {
         && elem) {
         if (elem.textContent.indexOf("To start of contest") != -1) {
             AddRanking(" - " + (await getContestMessage(contest)) + " (nav sākušās)")
+            await setContests(contests)
             return
         }
 
