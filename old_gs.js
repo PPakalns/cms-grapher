@@ -1,16 +1,11 @@
 function getRandomColor() {
-    console.log("test");
     var arr = [0, 0, 0];
-    console.log("test");
     do{
         for (var i = 0; i < 3; i++ ) {
             arr[ i ] = Math.floor(Math.random() * 230);
         }
-        console.log("test");
     } while (arr[ 0 ]>170 && arr[ 1 ]>170 && arr[ 2 ]>170);
-    console.log("test");
     var color = 'rgba('+arr[ 0 ]+','+arr[1]+","+arr[2]+',1)';
-    console.log("test");
     return color;
 }
 

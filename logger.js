@@ -18,24 +18,6 @@ function findColumnInRow(column_name, row) {
     throw ("Failed to find column " + column_name)
 }
 
-function sortRankingTable() {
-    console.log("Starting sort");
-    let tbodies = $("#core>table").get(0).tBodies[0];
-    let thead = $("#core>table").get(0).tHead;
-    let global_idx = findColumnInRow("Global", thead.rows[ 0 ]);
-    let store = [];
-    for(let i=0, len=tbodies.rows.length; i<len; i++){
-        let row = tbodies.rows[i];
-        let sortnr = parseFloat(getCellValue(row, global_idx));
-        store.push([(!isNaN(sortnr) && sortnr) || "NAN", row]);
-    }
-    console.log("Tabulas lielums: ", store.length);
-    store.sort((x,y) => {return y[0] - x[0]});
-    for(let i=0, len=store.length; i<len; i++){
-        tbodies.appendChild(store[i][1]);
-    }
-}
-
 function parseRankingScores(update_time, task_results, column_name) {
     let tbodies = $("#core>table").get(0).tBodies[0];
     let thead = $("#core>table").get(0).tHead;
@@ -60,7 +42,7 @@ function parseRankingScores(update_time, task_results, column_name) {
         let res = task_results[username].res;
 
         let feq = (x, y) => {
-            return Math.round(x * 100) == Math.round(y);
+            return Math.round(x * 100) == Math.round(y * 100);
         }
 
         while (res.length>=2
@@ -81,21 +63,35 @@ async function updateRes() {
     let contests = await getContests()
     let contest = contests[getId()]
 
-    AddRanking(" - " + await getContestMessage(contest))
-
     if (contest === undefined || !contest.log) {
+        AddRanking(" - " + await getContestMessage(contest))
         return
     }
+
+    contest.last_update = updateTime
 
     let elem = document.getElementById("remaining_text")
     if (!IGNORE_TO_START_OF_CONTEST
-        && elem
-        && elem.textContent.indexOf("To start of contest") != -1) {
+        && elem) {
+        if (elem.textContent.indexOf("To start of contest") != -1) {
+            AddRanking(" - " + (await getContestMessage(contest)) + " (nav sākušās)")
+            return
+        }
 
-        AddRanking(" - Nav sākušās")
-        return
+        contest.started = true
+
+        if (elem.textContent.trim().length == 0
+            || elem.textContent.indexOf("To end of analysis") != -1) {
+            contest["ended"] = true
+            AddRanking(" - " + await getContestMessage(contest))
+            await setContests(contests)
+            return;
+        } else {
+            contest["ended"] = false
+        }
     }
 
+    AddRanking(" - " + await getContestMessage(contest))
     let score_names = ['Global']
 
     // Find task names
@@ -112,7 +108,6 @@ async function updateRes() {
         parseRankingScores(updateTime, results[score_name], score_name)
     })
 
-    contest.last_update = updateTime
     contest.started = true
     await storeData(getId(), results)
     await setContests(contests)

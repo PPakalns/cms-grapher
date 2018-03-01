@@ -40,7 +40,7 @@ async function initContest() {
     {
         return;
     }
-    contests[id] = {log: true, started: false, last_update: 0}
+    contests[id] = {log: true, started: false, ended: false, last_update: 0}
     await setContests(contests)
     await updateState()
     reloadPage()

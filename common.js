@@ -38,6 +38,8 @@ function getContestMessage(contest){
         message = "Rezultātu ievākšana atspējota"
     } else if (!contest.started) {
         message = "Gaida sacensību sākumu"
+    } else if (contest["ended"]) {
+        message = "Sacensības beigušās"
     } else {
         message = "Ievāc rezultātus"
     }

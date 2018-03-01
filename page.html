@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="page.css">
   </head>
   <body>
-    <h1>CMS grapher</h1>
+      <h1>CMS grapher <small>©Pēteris Pakalns</small></h1>
     <div id="container">
         <div id="contest_id">
             Contest: <span></span>
@@ -14,6 +14,10 @@
             State: <span></span>
         </div>
         <div id="last_update">
+        </div>
+        <div>
+            <input style="background-color: lightgreen;" type="button" id="select_all" value="Atzīmēt visus">
+            <input style="background-color: pink; padding-left:2px;"type="button" id="remove_all" value="Noņemt visas atzīmes">
         </div>
         <div id="hcontainer">
             <div id="contest_table">
@@ -24,8 +28,7 @@
                     </tbody>
                 </table>
             </div>
-            <div id="graph">
-                TE BŪS GRAFIKS
+            <div id="graphs">
             </div>
         </div>
     </div>

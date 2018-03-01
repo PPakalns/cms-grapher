@@ -1,15 +1,46 @@
-#container {
+body {
+    width: 100%;
+}
+
+div {
+    margin: 0px;
+}
+
+#container, #graphs {
   align-items: left;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  width: 100%;
+}
+
+h1 small {
+    font-size: 0.6em;
+    color: #444444;
+}
+
+#graphs div{
+    width: 100%;
 }
 
 #hcontainer {
+  width: 100%;
   align-items: left;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+div#contest_table {
+    width: 20%;
+}
+
+div#contest_table td {
+    text-shadow: 0px 0px 15px #ffffff;
+}
+
+div#graphs {
+    width: 57%;
 }
 
 #hcontainer div {
