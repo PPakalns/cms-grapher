@@ -1,18 +1,17 @@
-
-// <div id="contest_id">
-//     Contest: <span></span>
-// </div>
-// <div id="contest_state">
-//     State: <span></span>
-// </div>
-// <div id="last_update">
-// </div>
-
 let active_contests = {}
 
 let stored_top = false
 let start = new Date()
 let show = 0
+
+let sadalijums = [2, 3, 5, 3]
+let sadalijums2 = [2, 3, 3, 3]
+
+function swapSadalijums() {
+    let tmp = sadalijums
+    sadalijums = sadalijums2
+    sadalijums2 = tmp
+}
 
 async function updateContest(cid, total_values, task_list) {
     let contest = await getContest(cid)
@@ -108,16 +107,32 @@ function drawBody(order, task_list, cresults) {
 
             if (columns[j] == "") {
                 vv = ""
-                if (i < 2)
+                color = "transparent"
+                if (i < sadalijums[0])
+                {
                     vv = " I "
-                else if (i < 2 + 3)
+                    color = "#ffdb2b"
+                }
+                else if (i < sadalijums[0] + sadalijums[1])
+                {
                     vv = " II "
-                else if (i < 2 + 3 + 4)
+                    color = "#a59e8b"
+                }
+                else if (i < sadalijums[0] + sadalijums[1] + sadalijums[2])
+                {
                     vv = " III "
+                    color = "#d16e23"
+                }
+                else if (i < sadalijums[0] + sadalijums[1] + sadalijums[2] + sadalijums[3])
+                {
+                    vv = " A "
+                    color = "#9bffe9"
+                }
                 setCellValue(row, j, vv)
                 row.cells[j].style.paddingLeft = "8px"
                 row.cells[j].style.paddingRight = "8px"
                 row.cells[j].style.textAlign = "center"
+                row.style.backgroundColor = color
                 continue
             }
 
@@ -160,7 +175,11 @@ async function updateRes() {
         return true;
     }
 
-    let top = ordered.slice(0, 9)
+    let ccnt = 0
+    for (let i = 0; i < sadalijums.length; i++)
+        ccnt += sadalijums[i]
+
+    let top = ordered.slice(0, ccnt)
     if (((new Date()) - start) > 10000) {
         if (stored_top == 0 || arrMatch(stored_top, top) == false) {
             $("#gifdiv").show()
